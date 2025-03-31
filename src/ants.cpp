@@ -1,65 +1,55 @@
-#include "../include/ants.hpp"
-
-// Constructeur de la fourmi
-Fourmi::Fourmi(int id, std::string position) : id(id), position(position) {}
-
+#include "ants.hpp"
 
 Salle::Salle(std::string nom, int capacite) : nom(nom), capacite(capacite) {}
 
+Fourmi::Fourmi(std::string id, Salle* position) : id(id), position(position) {}
 
-void Salle::ajouterConnexion(std::string salle) {
-    connexions.push_back(salle);
-}
-
-
-Fourmiliere::Fourmiliere(std::string entree, std::string sortie) : entree(entree), sortie(sortie) {}
-
-// Ajouter une salle à la fourmilière
 void Fourmiliere::ajouterSalle(std::string nom, int capacite) {
-    salles[nom] = Salle(nom, capacite);
+    salles[nom] = new Salle(nom, capacite);
 }
 
-// Ajouter un tunnel entre deux salles
-void Fourmiliere::ajouterTunnel(std::string salle1, std::string salle2) {
-    salles[salle1].ajouterConnexion(salle2);
-    salles[salle2].ajouterConnexion(salle1);
+void Fourmiliere::ajouterTunnel(std::string s1, std::string s2) {
+    if (salles.count(s1) && salles.count(s2)) {
+        salles[s1]->connexions.push_back(salles[s2]);
+        salles[s2]->connexions.push_back(salles[s1]);
+    }
 }
 
-// Trouver le plus court chemin entre deux salles (BFS)
-std::vector<std::string> Fourmiliere::trouverChemin(std::string depart, std::string arrivee) {
-    std::queue<std::vector<std::string>> queue;
-    queue.push({depart});
-    std::unordered_map<std::string, bool> visite;
-    
-    while (!queue.empty()) {
-        auto chemin = queue.front();
-        queue.pop();
-        std::string salle_actuelle = chemin.back();
+void Fourmiliere::ajouterFourmi(std::string id) {
+    Fourmi f(id, vestibule);
+    fourmis.push_back(f);
+}
 
-        if (salle_actuelle == arrivee) return chemin;
+void Fourmiliere::afficherGraphe() {
+    std::cout << "Graphe de la fourmiliere :\n";
+    for (auto& [nom, salle] : salles) {
+        std::cout << salle->nom << " reliee e : ";
+        for (auto& adj : salle->connexions) {
+            std::cout << adj->nom << " ";
+        }
+        std::cout << "\n";
+    }
+}
 
-        if (visite[salle_actuelle]) continue;
-        visite[salle_actuelle] = true;
+void Fourmiliere::simulerDeplacement() {
+    std::cout << "\n+++ Simulation du deplacement +++\n";
 
-        for (auto &voisin : salles[salle_actuelle].connexions) {
-            if (!visite[voisin]) {
-                auto nouveau_chemin = chemin;
-                nouveau_chemin.push_back(voisin);
-                queue.push(nouveau_chemin);
+    int etape = 1;
+    int index = 0;
+
+    while (index < fourmis.size()) {
+        std::cout << "+++ E " << etape << " +++\n";
+        int nb = 0;
+        for (auto& f : fourmis) {
+            if (f.position == vestibule && nb < 2) { // 2 max par étape
+                std::cout << f.id << " - " << f.position->nom << " - Sd\n";
+                f.position = dortoir;
+                index++;
+                nb++;
             }
         }
+        etape++;
     }
-    return {};
-}
 
-// Déplacer toutes les fourmis du vestibule au dortoir
-void Fourmiliere::deplacerFourmis() {
-    for (auto &fourmi : fourmis) {
-        std::vector<std::string> chemin = trouverChemin(entree, sortie);
-        
-        for (size_t i = 1; i < chemin.size(); ++i) {
-            std::cout << "Étape " << i << " : Fourmi " << fourmi.id << " -> " << chemin[i] << std::endl;
-            fourmi.position = chemin[i];
-        }
-    }
+    std::cout << "\nToutes les fourmis sont arrivees au dortoir.\n";
 }

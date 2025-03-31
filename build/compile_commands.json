@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Users/kamil/OneDrive/Bureau/uneviedefourmi/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/kamil/OneDrive/Bureau/uneviedefourmi/include -g -std=gnu++17 -o CMakeFiles\\uneviedefourmi.dir\\main.cpp.obj -c C:\\Users\\kamil\\OneDrive\\Bureau\\uneviedefourmi\\main.cpp",
+  "file": "C:\\Users\\kamil\\OneDrive\\Bureau\\uneviedefourmi\\main.cpp",
+  "output": "CMakeFiles\\uneviedefourmi.dir\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/kamil/OneDrive/Bureau/uneviedefourmi/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/kamil/OneDrive/Bureau/uneviedefourmi/include -g -std=gnu++17 -o CMakeFiles\\uneviedefourmi.dir\\src\\ants.cpp.obj -c C:\\Users\\kamil\\OneDrive\\Bureau\\uneviedefourmi\\src\\ants.cpp",
+  "file": "C:\\Users\\kamil\\OneDrive\\Bureau\\uneviedefourmi\\src\\ants.cpp",
+  "output": "CMakeFiles\\uneviedefourmi.dir\\src\\ants.cpp.obj"
+}
+]

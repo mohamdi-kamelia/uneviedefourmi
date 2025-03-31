@@ -1,39 +1,38 @@
 #ifndef ANTS_HPP
 #define ANTS_HPP
 
-#include <iostream>
+#include <string>
 #include <vector>
-#include <unordered_map>
-#include <queue>
-
-class Fourmi {
-public:
-    int id;
-    std::string position;
-    Fourmi(int id, std::string position);
-};
+#include <map>
+#include <iostream>
 
 class Salle {
 public:
     std::string nom;
     int capacite;
-    std::vector<std::string> connexions;
-
+    std::vector<Salle*> connexions;
     Salle(std::string nom, int capacite = 1);
-    void ajouterConnexion(std::string salle);
+};
+
+class Fourmi {
+public:
+    std::string id;
+    Salle* position;
+    Fourmi(std::string id, Salle* position);
 };
 
 class Fourmiliere {
 public:
-    std::unordered_map<std::string, Salle> salles;
+    Salle* vestibule;
+    Salle* dortoir;
+    std::map<std::string, Salle*> salles;
     std::vector<Fourmi> fourmis;
-    std::string entree, sortie;
 
-    Fourmiliere(std::string entree, std::string sortie);
     void ajouterSalle(std::string nom, int capacite = 1);
-    void ajouterTunnel(std::string salle1, std::string salle2);
-    std::vector<std::string> trouverChemin(std::string depart, std::string arrivee);
-    void deplacerFourmis();
+    void ajouterTunnel(std::string s1, std::string s2);
+    void ajouterFourmi(std::string id);
+    void afficherGraphe();
+    void simulerDeplacement();
 };
 
 #endif

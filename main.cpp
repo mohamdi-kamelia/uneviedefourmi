@@ -1,29 +1,52 @@
-#include "include/ants.hpp"
+#include "ants.hpp"
+#include <fstream>
+#include <sstream>
 
-int main() {
-    // Création de la fourmilière
-    Fourmiliere fourmiliere("S_v", "S_d");
-
-    // Ajout des salles
-    fourmiliere.ajouterSalle("S_v"); // Vestibule
-    fourmiliere.ajouterSalle("S_d"); // Dortoir
-    fourmiliere.ajouterSalle("S1");
-    fourmiliere.ajouterSalle("S2");
-
-    // Ajout des tunnels
-    fourmiliere.ajouterTunnel("S_v", "S1");
-    fourmiliere.ajouterTunnel("S_v", "S2");
-    fourmiliere.ajouterTunnel("S1", "S_d");
-    fourmiliere.ajouterTunnel("S2", "S_d");
-
-    // Ajout des fourmis
-    for (int i = 1; i <= 3; i++) {
-        fourmiliere.fourmis.push_back(Fourmi(i, "S_v"));
+void chargerDepuisFichier(const std::string& chemin, Fourmiliere& f) {
+    std::ifstream fichier(chemin);
+    if (!fichier) {
+        std::cerr << "Erreur lors de l'ouverture du fichier." << std::endl;
+        return;
     }
 
-    // Déplacer les fourmis
-    std::cout << "Déplacement des fourmis :\n";
-    fourmiliere.deplacerFourmis();
+    std::string ligne;
+    enum Section { AUCUNE, SALLES, TUNNELS, FOURMIS } section = AUCUNE;
 
+    while (std::getline(fichier, ligne)) {
+        if (ligne.empty()) continue;
+
+        if (ligne == "Salles:") {
+            section = SALLES;
+        } else if (ligne == "Tunnels:") {
+            section = TUNNELS;
+        } else if (ligne == "Fourmis:") {
+            section = FOURMIS;
+        } else {
+            std::istringstream iss(ligne);
+            if (section == SALLES) {
+                std::string nom;
+                int capacite;
+                iss >> nom >> capacite;
+                f.ajouterSalle(nom, capacite);
+                if (nom == "Sv") f.vestibule = f.salles[nom];
+                if (nom == "Sd") f.dortoir = f.salles[nom];
+            } else if (section == TUNNELS) {
+                std::string s1, s2;
+                iss >> s1 >> s2;
+                f.ajouterTunnel(s1, s2);
+            } else if (section == FOURMIS) {
+                std::string id;
+                iss >> id;
+                f.ajouterFourmi(id);
+            }
+        }
+    }
+}
+
+int main() {
+    Fourmiliere f;
+    chargerDepuisFichier("./data/exemple1.txt", f);
+    f.afficherGraphe();
+    f.simulerDeplacement();
     return 0;
 }
