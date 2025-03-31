@@ -1,0 +1,10 @@
+digraph Fourmiliere {
+  S2 [label="S2"];
+  S2 -> Sv;
+  S2 -> Sd;
+  S1 [label="S1\nf1"];
+  S1 -> Sv;
+  S1 -> Sd;
+  Sd [label="Sd"];
+  Sv [label="Sv\nf2"];
+}

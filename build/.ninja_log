@@ -1,4 +1,4 @@
 # ninja log v5
-1775	2194	7651242092659729	uneviedefourmi.exe	a877905ab1554b7c
-46	1584	7651238231354985	CMakeFiles/uneviedefourmi.dir/src/ants.cpp.obj	eae5b7499338b333
-36	1774	7651242088656211	CMakeFiles/uneviedefourmi.dir/main.cpp.obj	87b28ce9904eb58d
+3231	3692	7651579841506701	uneviedefourmi.exe	a877905ab1554b7c
+66	3160	7651345185960668	CMakeFiles/uneviedefourmi.dir/src/ants.cpp.obj	eae5b7499338b333
+41	3229	7651579837017270	CMakeFiles/uneviedefourmi.dir/main.cpp.obj	87b28ce9904eb58d

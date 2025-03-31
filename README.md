@@ -1,25 +1,54 @@
-# uneviedefourmi
 # Une vie de fourmi
 
-Ce projet simule les déplacements de fourmis dans une fourmilière modélisée sous forme de graphe. L’objectif est de déplacer toutes les fourmis du vestibule au dortoir en un minimum d’étapes, en respectant des règles strictes de capacité et de déplacement.
+## Description
+
+Ce projet simule le déplacement d'une colonie de fourmis depuis le vestibule (entrée) jusqu'au dortoir (salle de repos) dans une fourmilière représentée sous forme de graphe.  
+L'objectif est de déplacer toutes les fourmis en un **minimum d'étapes**, en respectant les **contraintes de capacité** et d’occupation des salles.
 
 ## Objectifs
 
-- Modéliser une fourmilière comme un graphe orienté non pondéré.
-- Implémenter les règles de déplacement des fourmis.
-- Utiliser une architecture orientée objet en C++.
-- Visualiser les étapes du déplacement.
-- Compiler et organiser le projet avec CMake.
+- Représenter la fourmilière comme un graphe non orienté.
+- Implémenter un système de déplacement respectant les règles imposées.
+- Simuler les mouvements des fourmis de manière optimisée.
+- Afficher les déplacements étape par étape dans le terminal.
+- Exporter les graphes de simulation au format `.dot` (compatible Graphviz).
 
-## Règles de simulation
+## Fonctionnalités
 
-- Toutes les fourmis commencent dans la salle d’entrée (le vestibule).
-- Elles doivent rejoindre la salle de repos (le dortoir).
-- Les salles intermédiaires ont une capacité limitée à une seule fourmi (sauf indication contraire).
-- Une fourmi peut traverser un tunnel uniquement si la salle de destination est libre.
-- Le vestibule et le dortoir peuvent accueillir plusieurs fourmis.
-- Les tunnels sont traversés instantanément.
-- Le but est de minimiser le nombre d’étapes nécessaires pour déplacer toutes les fourmis.
+- Chargement automatique de tous les fichiers de fourmilière (`.txt`) depuis le dossier `data/`.
+- Détection automatique du format de fichier (`classique` ou `alternatif`).
+- Simulation étape par étape du déplacement de toutes les fourmis.
+- Gestion de la capacité des salles et des règles de déplacement.
+- Affichage dans le terminal de la position de chaque fourmi à chaque étape.
+- Export automatique des graphes de simulation (format `.dot`) dans le dossier `output/`.
 
-## Structure du projet
+## Technologies utilisées
 
+- **Langage :** C++17
+- **Compilation :** CMake
+- **Visualisation (optionnel) :** Graphviz (pour `.dot` → `.png`)
+
+## Organisation du projet
+
+.
+├── include/  
+│   └── ants.hpp  
+├── src/  
+│   └── ants.cpp  
+├── data/  
+│   └── (fichiers .txt de fourmilières)  
+├── output/  
+│   └── (fichiers .dot exportés à chaque étape)  
+├── main.cpp  
+├── CMakeLists.txt  
+└── README.md  
+
+## Compilation
+
+Ouvrir un terminal dans le dossier du projet et exécuter :
+
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .

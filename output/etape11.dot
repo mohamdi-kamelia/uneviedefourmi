@@ -1,0 +1,19 @@
+digraph Fourmiliere {
+  S5 [label="S5\nf8"];
+  S5 -> Sd;
+  S4 [label="S4\nf9"];
+  S4 -> S5;
+  S4 -> S6;
+  S2 [label="S2\nf10"];
+  S2 -> S4;
+  S1 [label="S1"];
+  S1 -> Sv;
+  S1 -> S2;
+  S1 -> S3;
+  S3 [label="S3"];
+  S3 -> S4;
+  Sd [label="Sd\nf7\nf5\nf4\nf6\nf3\nf2\nf1"];
+  S6 [label="S6"];
+  S6 -> Sd;
+  Sv [label="Sv"];
+}

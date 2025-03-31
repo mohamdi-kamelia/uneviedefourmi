@@ -1,0 +1,38 @@
+digraph Fourmiliere {
+  S14 [label="S14"];
+  S14 -> S9;
+  S14 -> Sd;
+  Sd [label="Sd\nf10\nf16\nf9\nf12\nf20\nf7\nf15\nf5\nf4\nf11\nf1\nf3\nf17\nf2\nf14\nf19\nf13\nf22\nf6\nf18\nf8\nf21"];
+  S13 [label="S13"];
+  S13 -> Sd;
+  S6 [label="S6"];
+  S6 -> S7;
+  S6 -> S8;
+  S2 [label="S2\nf25"];
+  S2 -> S3;
+  S2 -> S5;
+  S1 [label="S1\nf26"];
+  S1 -> S2;
+  S1 -> Sv;
+  S1 -> S6;
+  S7 [label="S7"];
+  S7 -> S9;
+  S3 [label="S3\nf24"];
+  S3 -> S4;
+  S4 [label="S4\nf23"];
+  S4 -> Sd;
+  S4 -> S5;
+  S5 [label="S5"];
+  Sv [label="Sv\nf49\nf47\nf45\nf44\nf42\nf40\nf34\nf33\nf32\nf41\nf31\nf37\nf48\nf35\nf46\nf43\nf29\nf36\nf39\nf50\nf30\nf38\nf27\nf28"];
+  S12 [label="S12"];
+  S12 -> S8;
+  S12 -> S13;
+  S9 [label="S9"];
+  S8 [label="S8"];
+  S10 [label="S10"];
+  S10 -> S7;
+  S10 -> S14;
+  S11 [label="S11"];
+  S11 -> S8;
+  S11 -> S13;
+}
